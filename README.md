@@ -40,3 +40,31 @@ As a self-taught developer transitioning into the IAM field, I wanted to underst
 git clone https://github.com/MadinaZarif/mini-iam-bundid.git
 cd mini-iam-bundid/demo
 ./mvnw spring-boot:run
+
+Then open your browser at http://localhost:8080/login
+
+🧪 Login with one of the predefined users:
+
+
+Username	| Password	| Role
+admin	    | admin123	| ADMIN
+support	  | support123| SUPPORT
+citizen	  | citizen123| CITIZEN
+guest	    | guest123	| GUEST
+
+📚 Future Goals
+Connect to real database (PostgreSQL or MySQL)
+
+Add user registration and password encryption
+
+Implement audit logs and logging with Spring AOP
+
+Show understanding of real-world IAM challenges (JIT, RBAC, Zero Trust)
+
+ About the Author
+Hi! I'm Madina Zarif, a self-taught developer from Uzbekistan, currently based in Germany 🇩🇪. I'm learning IAM, Cloud, and backend technologies.
+This project is part of my career shift and practical learning path.
+
+🌐 madinazarif.de
+
+⭐ If you find this project helpful or inspiring, feel free to give it a star!
