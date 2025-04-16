@@ -1,0 +1,28 @@
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+target/
+*.class
+*.jar
+*.war
+
+# Logs
+*.log
+
+# Temporary
+*.tmp
+*.bak
+
+# Node/npm
+node_modules/
+
+# Other
+*.png
+*.jpg
+*.jpeg

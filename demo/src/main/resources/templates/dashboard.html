@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<link rel="stylesheet" href="/css/styles.css"/>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>IAM Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<h3>Authorities:</h3>
+
+<h2>👋 Hello, <span th:text="${username}"></span>!</h2>
+<div th:if="${role == 'ADMIN'}">
+    <h3>👑 Admin Panel</h3>
+    <p>Manage users, access control, and audit logs.</p>
+    <a th:href="@{/admin/users}">🔍 View All Users</a>
+</div>
+
+<div th:if="${role == 'SUPPORT'}">
+    <h3>🛠 Support Center</h3>
+    <p>Assist with citizen requests.</p>
+</div>
+
+<div th:if="${role == 'CITIZEN'}">
+    <h3>👤 Citizen Dashboard</h3>
+    <p>View your applications and status.</p>
+</div>
+
+<div th:if="${role == 'GUEST'}">
+    <h3>🚪 Guest Mode</h3>
+    <p>Limited view for guest users.</p>
+</div>
+
+<div class="section" sec:authorize="hasRole('SUPPORT')">
+    <h3>🛠 Support Center</h3>
+    <p>View and assist with citizen requests.</p>
+</div>
+<form method="post" th:action="@{/switch-role}">
+    <label for="role">Change your role:</label>
+    <select name="role" id="role">
+        <option value="ADMIN">Admin</option>
+        <option value="SUPPORT">Support</option>
+        <option value="CITIZEN">Citizen</option>
+        <option value="GUEST">Guest</option>
+    </select>
+    <button type="submit">Switch</button>
+</form>
+<form th:action="@{/logout}" method="post" class="logout-form">
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>User Management - Mini IAM</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #f2f2f2; }
+        h2, h3 { margin-top: 30px; }
+        form { display: inline; }
+        input, select, button { margin: 0 5px; padding: 5px; }
+        .add-form input, .add-form select { margin: 5px 10px 5px 0; }
+        .add-form button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+<h2>👥 User Management</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Role</th>
+        <th>Change Role</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+        <td>
+            <form th:action="@{/admin/users/role}" method="post">
+                <input type="hidden" name="username" th:value="${user.username}" />
+                <select name="role">
+                    <option th:selected="${user.role == 'ADMIN'}" value="ADMIN">Admin</option>
+                    <option th:selected="${user.role == 'SUPPORT'}" value="SUPPORT">Support</option>
+                    <option th:selected="${user.role == 'CITIZEN'}" value="CITIZEN">Citizen</option>
+                    <option th:selected="${user.role == 'GUEST'}" value="GUEST">Guest</option>
+                </select>
+                <button type="submit">Update</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/admin/users/delete}" method="post">
+                <input type="hidden" name="username" th:value="${user.username}" />
+                <button type="submit" style="color:red;">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Add New User</h3>
+<form th:action="@{/admin/users/add}" method="post" class="add-form">
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="text" name="password" placeholder="Password" required />
+    <select name="role">
+        <option value="ADMIN">Admin</option>
+        <option value="SUPPORT">Support</option>
+        <option value="CITIZEN">Citizen</option>
+        <option value="GUEST">Guest</option>
+    </select>
+    <br>
+    <button type="submit">➕ Add User</button>
+</form>
+
+<br><br>
+<form th:action="@{/dashboard}" method="get">
+    <button type="submit">⬅ Back to Dashboard</button>
+</form>
+</body>
+</html>

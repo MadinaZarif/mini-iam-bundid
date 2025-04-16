@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/css/styles.css" />
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Login - Mini IAM</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+<h2>🔐 Sign In</h2>
+
+<div th:if="${param.error}">
+    <p style="color: red;">❌ Invalid username or password</p>
+</div>
+
+<div th:if="${param.logout}">
+    <p style="color: green;">✅ You have been logged out</p>
+</div>
+
+<form th:action="@{/login}" method="post">
+    <label>Username:</label>
+    <input type="text" name="username" /><br>
+    <label>Password:</label>
+    <input type="password" name="password" /><br>
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>
